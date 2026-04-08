@@ -53,7 +53,7 @@ export const Pricing: React.FC = () => {
               <div className="text-5xl font-bold text-white mb-2">R$ 298<span className="text-xl text-slate-400 font-normal">,00</span></div>
               <p className="text-science-500 font-medium mb-8">ou 12x de R$ 30,82</p>
               
-              <Button id="checkout-button" fullWidth className="text-lg py-5 shadow-gold-500/20" onClick={() => window.open('https://pay.hotmart.com/P81943941Q?off=wricgrqu&sck=LP1', '_blank')}>
+              <Button id="checkout-button" fullWidth className="text-lg py-5 shadow-gold-500/20" onClick={() => window.open('https://pay.hotmart.com/P81943941Q?off=wricgrqu&sck=BTN1&utm_source=landingpage&utm_medium=button&utm_campaign=mediunidade', '_blank')}>
                 QUERO ME INSCREVER AGORA
               </Button>
               <p className="mt-4 text-xs text-slate-500">Pagamento seguro via Cartão, Pix ou Boleto.</p>

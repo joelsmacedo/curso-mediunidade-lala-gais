@@ -28,7 +28,7 @@ export const Navbar: React.FC = () => {
           </span>
         </div>
         <div className="hidden md:block">
-           <Button variant={isScrolled ? 'primary' : 'outline'} onClick={() => window.open('https://pay.hotmart.com/P81943941Q?off=wricgrqu&sck=LP1', '_blank')} className="px-6 py-2 text-sm">
+           <Button variant={isScrolled ? 'primary' : 'outline'} onClick={() => window.open('https://pay.hotmart.com/P81943941Q?off=wricgrqu&sck=BTN1&utm_source=landingpage&utm_medium=button&utm_campaign=mediunidade', '_blank')} className="px-6 py-2 text-sm">
              Matricular Agora
            </Button>
         </div>

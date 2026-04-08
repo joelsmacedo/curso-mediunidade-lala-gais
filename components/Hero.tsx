@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Button } from './Button';
-import { ChevronRight, ChevronDown, PlayCircle } from 'lucide-react';
+import { ChevronRight, ChevronDown, PlayCircle, Maximize, Minimize } from 'lucide-react';
 import { Modal } from './Modal';
 import YouTube, { YouTubeProps } from 'react-youtube';
 
@@ -8,7 +8,9 @@ export const Hero: React.FC = () => {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [offerButtonText, setOfferButtonText] = useState<string | null>(null);
   const [displayedText, setDisplayedText] = useState<string>('DESENVOLVA SUA MEDIUNIDADE!');
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const playerRef = useRef<any>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -39,6 +41,22 @@ export const Hero: React.FC = () => {
     return () => clearInterval(interval);
   }, [isVideoModalOpen]);
 
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      videoContainerRef.current?.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  };
+
   const onPlayerReady: YouTubeProps['onReady'] = (event) => {
     playerRef.current = event.target;
     event.target.playVideo();
@@ -53,6 +71,8 @@ export const Hero: React.FC = () => {
       modestbranding: 1,
       controls: 0,
       disablekb: 1,
+      iv_load_policy: 3,
+      fs: 0,
     },
   };
 
@@ -88,7 +108,7 @@ export const Hero: React.FC = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-          <Button onClick={() => window.open('https://pay.hotmart.com/P81943941Q?off=wricgrqu&sck=LP1', '_blank')}>
+          <Button onClick={() => window.open('https://pay.hotmart.com/P81943941Q?off=wricgrqu&sck=BTN1&utm_source=landingpage&utm_medium=button&utm_campaign=mediunidade', '_blank')}>
             Começar Jornada Agora
             <ChevronRight className="w-5 h-5 ml-2" />
           </Button>
@@ -119,17 +139,22 @@ export const Hero: React.FC = () => {
         onClose={() => setIsVideoModalOpen(false)}
         title="A Ciência da Mediunidade"
       >
-        <div className="relative aspect-video w-full rounded-xl overflow-hidden bg-black shadow-2xl border border-slate-800">
-          <div className="absolute inset-0 [&>div]:w-full [&>div]:h-full [&>div>iframe]:w-full [&>div>iframe]:h-full">
+        <div ref={videoContainerRef} className="relative aspect-video w-full rounded-xl overflow-hidden bg-black shadow-2xl border border-slate-800">
+          <div className="absolute inset-0 [&>div]:w-full [&>div]:h-full [&>div>iframe]:w-full [&>div>iframe]:h-full" style={{ transform: 'scale(1.15)', transformOrigin: 'center center' }}>
             <YouTube videoId="POi6V4j9mec" opts={opts} onReady={onPlayerReady} className="w-full h-full" />
           </div>
-          
-          {/* Overlays to prevent clicking YouTube external links while keeping central area free to click for play/pause */}
-          {/* Top block (prevents clicking title/avatar) */}
-          <div className="absolute top-0 left-0 right-0 h-16 sm:h-20 z-10" />
-          
-          {/* Bottom right block (prevents clicking the YouTube watermark logo) */}
-          <div className="absolute bottom-0 right-0 w-32 sm:w-40 h-16 sm:h-20 z-10" />
+
+          {/* Full transparent overlay — blocks ALL YouTube clickable elements */}
+          <div className="absolute inset-0 z-10" />
+
+          {/* Custom Fullscreen Button */}
+          <button
+            onClick={toggleFullscreen}
+            className="absolute bottom-3 right-3 z-30 flex items-center justify-center w-9 h-9 rounded-lg bg-black/60 hover:bg-black/90 border border-white/20 hover:border-white/50 text-white transition-all duration-200 backdrop-blur-sm shadow-lg"
+            title={isFullscreen ? 'Sair da tela cheia' : 'Tela cheia'}
+          >
+            {isFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+          </button>
 
           {/* Timed Offer Button - Always rendered but opacity controlled */}
           <div 
@@ -137,7 +162,7 @@ export const Hero: React.FC = () => {
               offerButtonText !== null ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-8 pointer-events-none'
             }`}
             onClick={() => {
-              window.open('https://pay.hotmart.com/P81943941Q?off=wricgrqu&sck=LP1', '_blank');
+              window.open('https://pay.hotmart.com/P81943941Q?off=wricgrqu&sck=BTN1&utm_source=landingpage&utm_medium=button&utm_campaign=mediunidade', '_blank');
               setIsVideoModalOpen(false);
             }}
           >
