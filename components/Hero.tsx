@@ -125,9 +125,8 @@ export const Hero: React.FC = () => {
 
       {/* Scroll indicator - absolute positioned at the bottom of the section */}
       <div 
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center justify-center opacity-60 hover:opacity-100 transition-opacity cursor-pointer animate-fade-in-up"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center justify-center opacity-60 transition-opacity animate-fade-in-up"
         style={{ animationDelay: '0.5s' }}
-        onClick={scrollToSyllabus}
       >
         <span className="text-[10px] uppercase tracking-widest text-slate-300 mb-2 font-medium">Rolar para baixo</span>
         <ChevronDown className="w-5 h-5 text-slate-300 animate-bounce" />
@@ -140,7 +139,7 @@ export const Hero: React.FC = () => {
         title="A Ciência da Mediunidade"
       >
         <div ref={videoContainerRef} className="relative aspect-video w-full rounded-xl overflow-hidden bg-black shadow-2xl border border-slate-800">
-          <div className="absolute inset-0 [&>div]:w-full [&>div]:h-full [&>div>iframe]:w-full [&>div>iframe]:h-full" style={{ transform: 'scale(1.15)', transformOrigin: 'center center' }}>
+          <div className="absolute inset-0 [&>div]:w-full [&>div]:h-full [&>div>iframe]:w-full [&>div>iframe]:h-full">
             <YouTube videoId="POi6V4j9mec" opts={opts} onReady={onPlayerReady} className="w-full h-full" />
           </div>
 
@@ -158,7 +157,7 @@ export const Hero: React.FC = () => {
 
           {/* Timed Offer Button - Always rendered but opacity controlled */}
           <div 
-            className={`absolute bottom-4 sm:bottom-10 left-2 right-2 sm:right-auto sm:left-10 z-30 cursor-pointer transition-all duration-1000 ease-in-out group flex justify-center sm:justify-start ${
+            className={`absolute bottom-4 sm:bottom-10 left-0 right-0 z-30 cursor-pointer transition-all duration-1000 ease-in-out group flex justify-center ${
               offerButtonText !== null ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-8 pointer-events-none'
             }`}
             onClick={() => {
@@ -175,13 +174,16 @@ export const Hero: React.FC = () => {
                 animation: softScale 3s ease-in-out infinite;
               }
             `}</style>
-            
-            <div className={`animate-soft-scale hover:!scale-105 transition-transform duration-300 ${displayedText === 'ACESSE GRAVADO!' ? 'w-auto max-w-[95%]' : 'w-[95%] sm:w-auto max-w-full'}`}>
-              <div className={`relative overflow-hidden flex items-center justify-center bg-gradient-to-r from-blue-700 to-blue-400 rounded-sm border-2 border-blue-300 py-2 sm:py-4 shadow-[0_0_80px_rgba(59,130,246,0.3)] transform -skew-x-6 sm:-skew-x-12 w-full transition-all duration-500 ${displayedText === 'ACESSE GRAVADO!' ? 'px-6 sm:px-10' : 'px-3 sm:px-16 md:px-24'}`}>
-                <div className="absolute inset-0 bg-white/20 blur-[2px] -translate-y-1/2 translate-x-1/2 rotate-45 group-hover:bg-white/30 transition-colors"></div>
-                <span className="block transform skew-x-6 sm:skew-x-12 text-white font-black italic text-[12px] sm:text-2xl lg:text-3xl tracking-tight drop-shadow-md text-center whitespace-nowrap">
-                  {displayedText}
-                </span>
+            <div className={`transition-transform duration-500 origin-bottom ${
+              isFullscreen && displayedText === 'DESENVOLVA SUA MEDIUNIDADE!' ? 'scale-[1.5] sm:scale-[2]' : 'scale-100'
+            }`}>
+              <div className={`animate-soft-scale hover:!scale-105 transition-transform duration-300 ${displayedText === 'ACESSE GRAVADO!' ? 'w-auto max-w-[95%]' : 'w-[95%] sm:w-auto max-w-full'}`}>
+                <div className={`relative overflow-hidden flex items-center justify-center bg-gradient-to-r from-blue-700 to-blue-400 rounded-sm border-2 border-blue-300 py-2 sm:py-4 shadow-[0_0_80px_rgba(59,130,246,0.3)] transform -skew-x-6 sm:-skew-x-12 w-full transition-all duration-500 ${displayedText === 'ACESSE GRAVADO!' ? 'px-6 sm:px-10' : 'px-3 sm:px-16 md:px-24'}`}>
+                  <div className="absolute inset-0 bg-white/20 blur-[2px] -translate-y-1/2 translate-x-1/2 rotate-45 group-hover:bg-white/30 transition-colors"></div>
+                  <span className="block transform skew-x-6 sm:skew-x-12 text-white font-black italic text-[12px] sm:text-2xl lg:text-3xl tracking-tight drop-shadow-md text-center whitespace-nowrap">
+                    {displayedText}
+                  </span>
+                </div>
               </div>
             </div>
           </div>

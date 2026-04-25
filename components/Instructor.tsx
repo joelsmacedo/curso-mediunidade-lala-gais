@@ -13,7 +13,7 @@ export const Instructor: React.FC = () => {
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-700">
                {/* Using a placeholder that looks dignified and appropriate for a professor */}
               <img 
-                src="https://lh3.googleusercontent.com/u/0/d/160TpSrZJDF5wu1NW_s2EuOU-2HjV-moH" 
+                src="https://drive.google.com/thumbnail?id=1y__IR7hzPZsfxRiuY8IKAosStWSL08vB&sz=w1000" 
                 alt="Professor Laércio Benedito Fonseca" 
                 className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105"
               />
@@ -53,19 +53,31 @@ export const Instructor: React.FC = () => {
               </div>
             </div>
 
-            <div className="mt-8 grid grid-cols-3 gap-6 text-center border-t border-slate-800 pt-8 opacity-80">
-              <div>
-                <p className="text-2xl font-bold text-white">+50 Anos</p>
-                <p className="text-sm text-slate-400">De Pesquisas e Experiências</p>
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center border-t border-slate-800 pt-8">
+              <style>{`
+                @keyframes subtlePulse {
+                  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(250, 204, 21, 0); }
+                  50% { transform: scale(1.03); box-shadow: 0 0 20px 0 rgba(250, 204, 21, 0.15); }
+                }
+                .animate-subtle-pulse {
+                  animation: subtlePulse 3s ease-in-out infinite;
+                }
+              `}</style>
+
+              <div className="block p-4 sm:p-6 rounded-xl bg-slate-800/40 border border-slate-700/50">
+                <p className="text-2xl md:text-3xl font-bold text-white">+50 Anos</p>
+                <p className="text-xs sm:text-sm text-slate-400 mt-2 font-medium">De Pesquisas e Experiências</p>
               </div>
-              <div>
-                <p className="text-2xl font-bold text-white">+9 Livros</p>
-                <p className="text-sm text-slate-400">Publicados</p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-white">12 Cursos</p>
-                <p className="text-sm text-slate-400">de Alimentação à Física Quântica</p>
-              </div>
+              
+              <a href="#" className="block p-4 sm:p-6 rounded-xl bg-yellow-500/10 border border-yellow-500/20 hover:border-yellow-400 hover:bg-yellow-500/20 transition-all duration-300 animate-subtle-pulse cursor-pointer group" style={{animationDelay: '1s'}}>
+                <p className="text-2xl md:text-3xl font-bold text-white group-hover:text-yellow-400 transition-colors">+9 Livros</p>
+                <p className="text-xs sm:text-sm text-slate-300 mt-2 font-medium">Publicados</p>
+              </a>
+              
+              <a href="#" className="block p-4 sm:p-6 rounded-xl bg-yellow-500/10 border border-yellow-500/20 hover:border-yellow-400 hover:bg-yellow-500/20 transition-all duration-300 animate-subtle-pulse cursor-pointer group" style={{animationDelay: '2s'}}>
+                <p className="text-2xl md:text-3xl font-bold text-white group-hover:text-yellow-400 transition-colors">12 Cursos</p>
+                <p className="text-xs sm:text-sm text-slate-300 mt-2 font-medium">de Alimentação à Física Quântica</p>
+              </a>
             </div>
           </div>
         </div>
